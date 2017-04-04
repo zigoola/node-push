@@ -3,19 +3,10 @@ Node Push Notifications
 
 A node.js module for interfacing with Apple Push Notification, Google Cloud Messaging, Windows Push Notification and Amazon Device Messaging services.
 
-[![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://npmjs.org/package/node-pushnotifications)
-[![NPM version](http://img.shields.io/npm/v/node-pushnotifications.svg?style=flat)](https://npmjs.org/package/node-pushnotifications)
-[![Downloads](http://img.shields.io/npm/dm/node-pushnotifications.svg?style=flat)](https://npmjs.org/package/node-pushnotifications)
-[![Build Status](http://img.shields.io/travis/appfeel/node-pushnotifications.svg?style=flat)](https://travis-ci.org/appfeel/node-pushnotifications)
-[![Coverage Status](https://coveralls.io/repos/github/appfeel/node-pushnotifications/badge.svg?branch=master)](https://coveralls.io/github/appfeel/node-pushnotifications?branch=master)
-[![Dependencies](https://david-dm.org/appfeel/node-pushnotifications/status.svg)](https://david-dm.org/appfeel/node-pushnotifications)
-
-**NOTE:** Version 1.x has completely been redesigned to be compatible with new apn 2.x.
-
 ## Installation
 
 ```bash
-npm install node-pushnotifications --save
+npm install node-push --save
 ```
 
 ## Features
@@ -58,7 +49,7 @@ const settings = {
         ...
     }
 };
-const PushNotifications = new require('node-pushnotifications');
+const PushNotifications = new require('node-push');
 const push = new PushNotifications(settings);
 ```
 
@@ -90,9 +81,9 @@ Both `title` and `body` fields are required (or `alert` for ios). The other fiel
 ```js
 const data = {
     title: 'New push notification', // REQUIRED
-    body: 'Powered by AppFeel', // REQUIRED
+    body: 'Powered by Zigoola', // REQUIRED
     custom: {
-        sender: 'AppFeel',
+        sender: 'Zigoola',
     },
     priority: 'high', // gcm, apn. Supported values are 'high' or 'normal' (gcm). Will be translated to 10 and 5 for apn. Defaults to 'high'
     collapseKey: '', // gcm for android, used as collapseId in apn
@@ -249,7 +240,7 @@ The following parameters are used to create a GCM message. See https://developer
         icon: undefined,
         msgcnt: undefined
         // Any custom data
-        sender: 'appfeel-test',
+        sender: 'test',
     },
     notification: {
         title: 'title',
@@ -380,16 +371,12 @@ const ADMmesssage = {
 * [See node-adm fields](https://github.com/umano/node-adm#usage)
 
 
-## Resources
-
-- [Node Push Notify from alexlds](https://github.com/alexlds/node-push-notify)
-
 ## LICENSE
 
 ```
 The MIT License (MIT)
 
-Copyright (c) 2016 AppFeel
+Copyright (c) 2016
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -409,5 +396,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-*<p style="font-size: small;" align="right"><a color="#232323;" href="http://appfeel.com">Made in Barcelona with <span color="#FCB"><3</span> and <span color="#BBCCFF">Code</span></a></p>*

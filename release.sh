@@ -10,9 +10,6 @@ echo "    PATCH version when you make backwards-compatible bug fixes."
 echo
 echo "Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format."
 echo
-echo -e "See \033[4m\033[36mhttp://semver.org"
-echo -e "\033[0mCopyright (C) Appfeel 2016, \033[4m\033[36mhttp://appfeel.com"
-echo -e "\033[0mLICENSE: MIT"
 echo
 
 oldVersion=`npm view . version`

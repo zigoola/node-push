@@ -2,6 +2,8 @@ import sendGCM from './sendGCM';
 import sendAPN from './sendAPN';
 import sendADM from './sendADM';
 import sendWNS from './sendWNS';
+import sendHuawei from './sendHuawei';
+import sendXiaomi from './sendXiaomi';
 
 const defaultSettings = {
     gcm: {
@@ -51,6 +53,15 @@ const defaultSettings = {
     mpns: {
         options: {},
     },
+    huawei: {
+        appId: null, // PUT YOUR APPID HERE
+        appSecret: null // PUT YOUR APP SECRET HERE
+    },
+    xiaomi: {
+        production: true,
+        restrictedPackageName: null,
+        appSecret: null,
+    }
 };
 
 function PN(options) {
@@ -73,27 +84,33 @@ PN.prototype.sendWith = function sendWith(method, regIds, data, cb) {
         });
 };
 
-PN.prototype.send = function send(_regIds, data, callback) {
+PN.prototype.send = function send(_tokens, data, callback) {
     const promises = [];
     const regIdsGCM = [];
     const regIdsAPN = [];
     const regIdsWNS = [];
     const regIdsADM = [];
+    const regIdsHuawei = [];
+    const regIdsXiaomi = [];
     const regIdsUnk = [];
-    const regIds = Array.isArray(_regIds || []) ? _regIds || [] : [_regIds];
+    const tokens = Array.isArray(_tokens || []) ? _tokens || [] : [_tokens];
 
     // Classify each pushId for corresponding device
-    for (const regId of regIds) {
-        if (regId.substring(0, 4) === 'http') {
-            regIdsWNS.push(regId);
-        } else if (/(amzn|adm)/i.test(regId)) {
-            regIdsADM.push(regId);
-        } else if (regId.length > 64) {
-            regIdsGCM.push(regId);
-        } else if (regId.length === 64) {
-            regIdsAPN.push(regId);
+    for (const token of tokens) {
+        if (token.source == "wns") {
+            regIdsWNS.push(token.registrationId);
+        } else if (token.source == "adm") {
+            regIdsADM.push(token.registrationId);
+        } else if (token.source == "gcm") {
+            regIdsGCM.push(token.registrationId);
+        } else if (token.source == "apn") {
+            regIdsAPN.push(token.registrationId);
+        } else if (token.source == "huawei") {
+            regIdsHuawei.push(token.registrationId);
+        } else if (token.source == "xiaomi") {
+            regIdsXiaomi.push(token.registrationId);
         } else {
-            regIdsUnk.push(regId);
+            regIdsUnk.push(token.registrationId);
         }
     }
 
@@ -116,6 +133,16 @@ PN.prototype.send = function send(_regIds, data, callback) {
         // Amazon ADM
         if (regIdsADM.length > 0) {
             promises.push(this.sendWith(sendADM, regIdsADM, data));
+        }
+
+        // Huawei push
+        if (regIdsHuawei.length > 0){
+            promises.push(this.sendWith(sendHuawei, regIdsHuawei, data));
+        }
+
+        // Xiaomi push
+        if (regIdsXiaomi.length > 0){
+            promises.push(this.sendWith(sendXiaomi, regIdsHuawei, data));
         }
     } catch (err) {
         promises.push(Promise.reject(err));

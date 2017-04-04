@@ -16,7 +16,7 @@ const data = {
     body: 'body',
     sound: 'mySound.aiff',
     custom: {
-        sender: 'appfeel-test',
+        sender: 'test',
     },
 };
 const pn = new PN({

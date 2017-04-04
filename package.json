@@ -1,10 +1,10 @@
 {
-  "name": "node-pushnotifications",
+  "name": "node-push",
   "description": "A cross-platform push service for node.js",
-  "version": "1.0.17",
+  "version": "0.0.1",
   "author": {
-    "name": "AppFeel",
-    "email": "info@appfeel.com"
+    "name": "zigoola",
+    "email": "zhdeng@outlook.com"
   },
   "scripts": {
     "coveralls": "cat ./coverage/lcov.info | coveralls",
@@ -36,22 +36,26 @@
     "wphone",
     "windows phone",
     "wns",
-    "mpns"
+    "mpns",
+    "huawei",
+    "xiaomi"
   ],
   "main": "index.js",
   "bugs": {
-    "url": "https://github.com/appfeel/node-pushnotifications",
-    "email": "info@appfeel.com"
+    "url": "https://github.com/zigoola/node-push",
+    "email": "zhdeng@outlook.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/appfeel/node-pushnotifications.git"
+    "url": "https://github.com/zigoola/node-push.git"
   },
   "dependencies": {
     "apn": "^2.1.1",
     "node-adm": "^0.9.1",
     "node-gcm": "^0.14.4",
-    "wns": "^0.5.3"
+    "wns": "^0.5.3",
+    "huawei-push": "^0.0.6-0",
+    "xiaomi-push": "^0.4.4"
   },
   "engines": {
     "node": ">= 4.6.0"
@@ -64,7 +68,7 @@
     }
   },
   "readmeFilename": "README.md",
-  "homepage": "https://github.com/appfeel/node-pushnotifications",
+  "homepage": "https://github.com/zigoola/node-push",
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
@@ -84,9 +88,9 @@
   "license": "MIT",
   "contributors": [
     {
-      "name": "Alexander Friedl",
-      "email": "mail@alexanderfriedl.com",
-      "url": "https://github.com/alex-friedl"
+      "name": "Gary Deng",
+      "email": "zhdeng@outlook.com",
+      "url": "https://github.com/zigoola"
     }
   ]
 }
