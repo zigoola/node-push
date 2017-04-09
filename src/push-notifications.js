@@ -142,7 +142,7 @@ PN.prototype.send = function send(_tokens, data, callback) {
 
         // Xiaomi push
         if (regIdsXiaomi.length > 0){
-            promises.push(this.sendWith(sendXiaomi, regIdsHuawei, data));
+            promises.push(this.sendWith(sendXiaomi, regIdsXiaomi, data));
         }
     } catch (err) {
         promises.push(Promise.reject(err));

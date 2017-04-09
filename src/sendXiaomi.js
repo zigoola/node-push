@@ -1,4 +1,4 @@
-var MiPush = require('../lib');
+var MiPush = require('xiaomi-push');
 var Message = MiPush.Message;
 var Notification = MiPush.Notification;
 
@@ -6,17 +6,17 @@ const method = 'xiaomi';
 
 module.exports = (regIds, data, settings) => {
     var message = new Message();
-    message
-    .title(data.title)
-    .description('push')
-    .payload(data.content)
-    .passThrough(0)
+    message.title(data.title)
+    .description(data.alert)
     .notifyType(-1)
+    .passThrough(0)
+    .extra('_id', data._id)
+    .extra('message', data.message)
     .extra('badge', 6);
 
     var notification = new Notification({
-        production: settings.production,
-        appSecret: settings.appSecret
+        production: settings.xiaomi.production,
+        appSecret: settings.xiaomi.appSecret,
     });
 
     const resumed = {
@@ -25,6 +25,8 @@ module.exports = (regIds, data, settings) => {
         failure: 0,
         message: [],
     };
+
+    var promises = [];
 
     regIds.forEach((regId) => {
         notification.send(regId, message, (err, response) => {

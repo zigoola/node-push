@@ -1,4 +1,4 @@
-const huawei = require('huawei-push');
+const Huawei = require('huawei-push');
 const Message = Huawei.Message;
 const Notification = Huawei.Notification;
 
@@ -10,8 +10,8 @@ module.exports = (regIds, data, settings) => {
         .content(data.body);
 
     var notification = new Notification({
-        appId: settings.appId,
-        appSecret: settings.appSecret
+        appId: settings.huawei.appId,
+        appSecret: settings.huawei.appSecret,
     });
 
     return notification.send(message, regIds)
