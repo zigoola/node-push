@@ -1,19 +1,16 @@
 {
   "name": "node-push",
   "description": "A cross-platform push service for node.js",
-  "version": "0.0.1",
-  "author": {
-    "name": "zigoola",
-    "email": "zhdeng@outlook.com"
-  },
+  "version": "0.1.0",
+  "author": "zigoola <zhdeng@outlook.com>",
   "scripts": {
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "test-cover": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- test/ --compilers jsx:babel-core/register --recursive; opn ./coverage/lcov-report/index.html",
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- test/ --compilers jsx:babel-core/register --recursive --report lcovonly",
-    "build": "./node_modules/.bin/babel src -d lib",
+    "test-cover": "istanbul cover ./node_modules/.bin/_mocha -- test/ --compilers jsx:babel-core/register --recursive; opn ./coverage/lcov-report/index.html",
+    "test": "istanbul cover ./node_modules/.bin/_mocha -- test/ --compilers jsx:babel-core/register --recursive --report lcovonly",
+    "build": "babel src -d lib",
     "prepublish": "npm run lint && npm test && npm run build",
     "lint": "eslint src/**/*.js",
-    "test-alone": "./node_modules/.bin/_mocha test/ --compilers jsx:babel-core/register --recursive -w"
+    "test-alone": "_mocha test/ --compilers jsx:babel-core/register --recursive -w"
   },
   "keywords": [
     "notifications",
@@ -47,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zigoola/node-push.git"
+    "url": "git+https://github.com/zigoola/node-push.git"
   },
   "dependencies": {
     "apn": "^2.1.1",
@@ -67,7 +64,6 @@
       "node": true
     }
   },
-  "readmeFilename": "README.md",
   "homepage": "https://github.com/zigoola/node-push",
   "devDependencies": {
     "babel-cli": "^6.16.0",
@@ -87,10 +83,9 @@
   },
   "license": "MIT",
   "contributors": [
-    {
-      "name": "Gary Deng",
-      "email": "zhdeng@outlook.com",
-      "url": "https://github.com/zigoola"
-    }
-  ]
+    "Gary Deng <zhdeng@outlook.com> (https://github.com/zigoola)"
+  ],
+  "directories": {
+    "test": "test"
+  }
 }

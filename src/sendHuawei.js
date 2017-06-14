@@ -14,7 +14,11 @@ module.exports = (regIds, data, settings) => {
         appSecret: settings.huawei.appSecret,
     });
 
-    return notification.send(message, regIds)
+    var callback = function(err, data) {
+        console.log(err, data);
+    };
+
+    return notification.send(regIds, message, callback)
         .then((response) => {
             const resumed = {
                 method,
