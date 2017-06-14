@@ -54,14 +54,14 @@ const defaultSettings = {
         options: {},
     },
     huawei: {
-        appId: null, // PUT YOUR APPID HERE
-        appSecret: null // PUT YOUR APP SECRET HERE
+        appId: null,
+        appSecret: null,
     },
     xiaomi: {
         production: true,
         restrictedPackageName: null,
         appSecret: null,
-    }
+    },
 };
 
 function PN(options) {
@@ -97,17 +97,17 @@ PN.prototype.send = function send(_tokens, data, callback) {
 
     // Classify each pushId for corresponding device
     for (const token of tokens) {
-        if (token.source == "wns") {
+        if (token.source === 'wns') {
             regIdsWNS.push(token.registrationId);
-        } else if (token.source == "adm") {
+        } else if (token.source === 'adm') {
             regIdsADM.push(token.registrationId);
-        } else if (token.source == "gcm") {
+        } else if (token.source === 'gcm') {
             regIdsGCM.push(token.registrationId);
-        } else if (token.source == "apn") {
+        } else if (token.source === 'apn') {
             regIdsAPN.push(token.registrationId);
-        } else if (token.source == "huawei") {
+        } else if (token.source === 'huawei') {
             regIdsHuawei.push(token.registrationId);
-        } else if (token.source == "xiaomi") {
+        } else if (token.source === 'xiaomi') {
             regIdsXiaomi.push(token.registrationId);
         } else {
             regIdsUnk.push(token.registrationId);
@@ -136,12 +136,12 @@ PN.prototype.send = function send(_tokens, data, callback) {
         }
 
         // Huawei push
-        if (regIdsHuawei.length > 0){
+        if (regIdsHuawei.length > 0) {
             promises.push(this.sendWith(sendHuawei, regIdsHuawei, data));
         }
 
         // Xiaomi push
-        if (regIdsXiaomi.length > 0){
+        if (regIdsXiaomi.length > 0) {
             promises.push(this.sendWith(sendXiaomi, regIdsXiaomi, data));
         }
     } catch (err) {

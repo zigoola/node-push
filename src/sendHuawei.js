@@ -1,21 +1,22 @@
 const Huawei = require('huawei-push');
+
 const Message = Huawei.Message;
 const Notification = Huawei.Notification;
 
 const method = 'huawei';
 
 module.exports = (regIds, data, settings) => {
-    var message = new Message();
+    const message = new Message();
     message.title(data.title)
         .content(data.body);
 
-    var notification = new Notification({
+    const notification = new Notification({
         appId: settings.huawei.appId,
         appSecret: settings.huawei.appSecret,
     });
 
-    var callback = function(err, data) {
-        console.log(err, data);
+    const callback = (err, result) => {
+        console.log(err, result);
     };
 
     return notification.send(regIds, message, callback)
